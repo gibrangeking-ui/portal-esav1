@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESA — Edukasi Space Astronomy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #03030d;
+            color: #ffffff;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050515;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+
+        /* Starry Background Layers */
+        .space-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 50%, #080721 0%, #03030d 100%);
+        }
+        
+        .stars-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 120px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 20px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 170px 90px, rgba(255,255,255,0.9), rgba(0,0,0,0));
+            background-size: 250px 250px;
+            opacity: 0.4;
+        }
+
+        /* Glow effects */
+        .nebula-glow-1 {
+            position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            top: -10%; left: -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .nebula-glow-2 {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+            bottom: 10%; right: -5%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Card Hover Effects */
+        .hover-cosmic {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-cosmic:hover {
+            transform: translateY(-8px);
+            border-color: #8b5cf6;
+            box-shadow: 0 15px 30px -10px rgba(139, 92, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Starry & Space Background Setup -->
+    <div class="space-bg"></div>
+    <div class="stars-overlay"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-[#03030d]/70 border-b border-gray-800/60 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-purple-500/20">
+                    <i class="fa-solid fa-user-astronaut text-white text-lg"></i>
+                </div>
+                <span class="font-extrabold text-xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-purple-400">ESA</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-purple-400 transition-colors">Home</a>
+                <a href="#about" class="hover:text-purple-400 transition-colors">Tentang Kami</a>
+                <a href="#explore" class="hover:text-purple-400 transition-colors">Eksplorasi</a>
+                <a href="#register" class="hover:text-purple-400 transition-colors">Registrasi</a>
+                <a href="#collab" class="hover:text-purple-400 transition-colors">Kerja Sama</a>
+            </div>
+            <div>
+                <a href="#register" class="bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] text-white text-xs font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-purple-500/20 transition transform hover:scale-105">
+                    Gabung Grup
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HERO / HOME -->
+    <section id="home" class="relative min-h-[calc(100vh-80px)] flex items-center px-4 sm:px-6 lg:px-8 py-16 overflow-hidden">
+        <div class="nebula-glow-1"></div>
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-100">
+            
+            <!-- Left Text Content -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-wider">
+                    <i class="fa-solid fa-meteor animate-pulse"></i> Komunitas Astronomi Teraktif
+                </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                    <span class="block text-white">ESA</span>
+                    <span class="block bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] via-[#3B82F6] to-white mt-1">
+                        EDUKASI SPACE ASTRONOMY
+                    </span>
+                </h1>
+                <p class="text-xl font-semibold text-purple-200">"Jelajahi Alam Semesta, Bersama Komunitas."</p>
+                <p class="text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed text-base sm:text-lg">
+                    Grup WhatsApp edukasi astronomi paling aktif di Indonesia. Dari pemula hingga pengamat langit berpengalaman, kami berkumpul untuk membedah misteri kosmos.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#register" class="w-full sm:w-auto text-center px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] text-white font-bold rounded-xl shadow-xl shadow-purple-600/20 hover:shadow-purple-600/40 transition transform hover:-translate-y-0.5">
+                        Gabung Sekarang <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                    <a href="#explore" class="w-full sm:w-auto text-center px-8 py-4 bg-gray-900/80 border border-gray-800 text-gray-200 font-semibold rounded-xl hover:bg-gray-800/80 transition backdrop-blur-sm">
+                        Lihat Info Astronomi
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual Graphic -->
+            <div class="lg:col-span-5 flex justify-center relative">
+                <div class="absolute w-72 h-72 bg-blue-500/10 blur-3xl rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                <!-- Simulated Parallax / Glowing Circular Object representing Space Theme -->
+                <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full border border-gray-800 p-6 relative flex items-center justify-center animate-[spin_100s_linear_infinite]">
+                    <div class="absolute w-4 h-4 bg-purple-500 rounded-full top-10 left-10 shadow-[0_0_15px_#8b5cf6]"></div>
+                    <div class="absolute w-2 h-2 bg-blue-400 rounded-full bottom-16 right-16 shadow-[0_0_10px_#3b82f6]"></div>
+                    <div class="w-full h-full rounded-full border border-dashed border-purple-500/30 p-6 flex items-center justify-center">
+                        <div class="w-full h-full rounded-full bg-gradient-to-tr from-purple-950/40 via-blue-950/20 to-black flex items-center justify-center overflow-hidden border border-purple-500/20">
+                            <i class="fa-solid fa-globe text-6xl sm:text-8xl text-blue-500/40 animate-pulse"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT ESA -->
+    <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-900 bg-[#050512]/40 relative">
+        <div class="nebula-glow-2"></div>
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <div class="inline-flex justify-center items-center w-12 h-12 rounded-xl bg-purple-950/50 border border-purple-500/30 text-purple-400 text-xl">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Tentang Grup Kami</h2>
+            <div class="h-1 w-20 bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] mx-auto rounded-full"></div>
+            <p class="text-lg sm:text-xl text-gray-300 leading-relaxed text-justify sm:text-center px-2">
+                ESA, atau <span class="text-[#8B5CF6] font-semibold">EDUKASI SPACE ASTRONOMY</span>, adalah komunitas WhatsApp yang berfokus pada edukasi dan diskusi seputar ilmu astronomi. Komunitas ini didirikan pada <span class="text-[#3B82F6] font-semibold">25 Juni 2026</span> oleh seorang admin yang terinspirasi langsung dari konten edukasi di media sosial. Dari obrolan santai yang interaktif hingga diskusi sains mendalam, ESA menjadi rumah bersama bagi siapa saja yang memiliki rasa ingin tahu yang tak terbatas tentang rahasia keindahan alam semesta.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: EXPLORE THE UNIVERSE / HAVE FUN -->
+    <section id="explore" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Explore The Universe</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Update ringan dan info menarik seputar fenomena menakjubkan di alam semesta.</p>
+            </div>
+
+            <!-- Card Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-gray-900/40 rounded-2xl border border-gray-800 p-6 hover-cosmic flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-lg">
+                            <i class="fa-solid fa-star-shooting"></i><i class="fa-solid fa-cloud-moon"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Hujan Meteor Perseid</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Puncaknya terjadi setiap bulan Agustus. Cara mengamatgnya sangat mudah dan tidak memerlukan teleskop, cukup cari lokasi yang gelap gulita dan lapang.
+                        </p>
+                    </div>
+                    <span class="text-xs text-amber-400/80 font-semibold mt-4 inline-block">Fenomena Tahunan</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-gray-900/40 rounded-2xl border border-gray-800 p-6 hover-cosmic flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-lg">
+                            <i class="fa-solid fa-circle-dot"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Apa Itu Lubang Hitam?</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Penjelasan singkat 1 menit untuk pemula: Lubang hitam adalah suatu objek dengan gaya gravitasi super masif luar biasa kuat, bahkan seberkas cahaya pun tidak bisa lolos darinya.
+                        </p>
+                    </div>
+                    <span class="text-xs text-purple-400/80 font-semibold mt-4 inline-block">Fisika Teoretis</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-gray-900/40 rounded-2xl border border-gray-800 p-6 hover-cosmic flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
+                            <i class="fa-solid fa-shuttle-space"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Foto Nebula Orion</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Dikenal sebagai Messier 42, objek kosmik menakjubkan ini merupakan salah satu kompleks awan molekuler tempat lahirnya bintang-bintang baru di galaksi kita.
+                        </p>
+                    </div>
+                    <span class="text-xs text-blue-400/80 font-semibold mt-4 inline-block">Astrofotografi</span>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-gray-900/40 rounded-2xl border border-gray-800 p-6 hover-cosmic flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 text-lg">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Misi ke Mars 2026</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Update berkala mengenai lini masa peluncuran roket penjelajah terbaru hasil kolaborasi agensi luar angkasa NASA & ESA guna meneliti jejak air dan tanda kehidupan purba.
+                        </p>
+                    </div>
+                    <span class="text-xs text-rose-400/80 font-semibold mt-4 inline-block">Eksplorasi Angkasa</span>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-gray-900/40 rounded-2xl border border-gray-800 p-6 hover-cosmic flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-lg">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Gerhana Bulan</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Pelajari jadwal prediksi kedatangan gerhana bulan total di wilayah Indonesia lengkap beserta panduan panduan praktis memotret keindahan umbra bulan bermodalkan kamera HP.
+                        </p>
+                    </div>
+                    <span class="text-xs text-indigo-400/80 font-semibold mt-4 inline-block">Observasi Langit</span>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-gray-900/40 rounded-2xl border border-gray-800 p-6 hover-cosmic flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Quiz Astronomi</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Asah dan uji sejauh mana tingkat pemahaman wawasanmu! Seberapa mendalam kamu mengenali objek-objek eksotis penyusun ekosistem tata surya kita?
+                        </p>
+                    </div>
+                    <span class="text-xs text-emerald-400/80 font-semibold mt-4 inline-block">Interactive Fun</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: REGISTRASI & AUTO-GENERATE MEMBER CARD -->
+    <section id="register" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-900 bg-[#040414]/60">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Registrasi Member ESA</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Daftarkan dirimu untuk mendapatkan ID Resmi Komunitas dan membuka akses langsung ke grup WhatsApp utama kami.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Registration Form Input (Left) -->
+                <div class="lg:col-span-6 bg-gray-900/30 border border-gray-800 rounded-2xl p-6 sm:p-8 space-y-6 backdrop-blur-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label for="fullName" class="text-xs font-semibold text-purple-300 uppercase tracking-wider">Nama Lengkap</label>
+                            <input type="text" id="fullName" placeholder="Contoh: Budi Antariksa" class="w-full bg-black/40 border border-gray-800 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="age" class="text-xs font-semibold text-purple-300 uppercase tracking-wider">Umur</label>
+                            <input type="number" id="age" placeholder="Contoh: 19" class="w-full bg-black/40 border border-gray-800 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="city" class="text-xs font-semibold text-purple-300 uppercase tracking-wider">Asal Kota / Askot</label>
+                        <input type="text" id="city" placeholder="Contoh: Bandung" class="w-full bg-black/40 border border-gray-800 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="fieldInterest" class="text-xs font-semibold text-purple-300 uppercase tracking-wider">Bidang Astronomi Yang Disukai</label>
+                        <select id="fieldInterest" class="w-full bg-neutral-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition appearance-none cursor-pointer">
+                            <option value="Tata Surya">Tata Surya</option>
+                            <option value="Deep Space">Deep Space</option>
+                            <option value="Astrofotografi">Astrofotografi</option>
+                            <option value="Sains Roket">Sains Roket</option>
+                            <option value="Fenomena Kosmik">Fenomena Kosmik</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="reasonJoin" class="text-xs font-semibold text-purple-300 uppercase tracking-wider">Alasan Bergabung</label>
+                        <textarea id="reasonJoin" rows="3" placeholder="Ceritakan singkat motivasimu bergabung..." class="w-full bg-black/40 border border-gray-800 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition resize-none"></textarea>
+                    </div>
+
+                    <button onclick="processMembership()" class="w-full bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-purple-500/20 transition transform hover:-translate-y-0.5 cursor-pointer">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Submit & Generate Kartu Member
+                    </button>
+                </div>
+
+                <!-- Generated Interactive Canvas Card Output (Right) -->
+                <div class="lg:col-span-6 flex flex-col items-center justify-center space-y-6">
+                    <div class="w-full max-w-[460px] bg-gray-950/40 p-4 border border-dashed border-gray-800 rounded-2xl flex justify-center">
+                        <!-- Hidden source canvas used for rendering, displayed responsively -->
+                        <canvas id="cardCanvas" width="500" height="280" class="w-full h-auto rounded-xl shadow-2xl shadow-black/80 bg-[#090915]"></canvas>
+                    </div>
+
+                    <!-- Post-submit action panel -->
+                    <div id="actionPanel" class="w-full max-w-[460px] hidden text-center space-y-4 bg-purple-950/10 border border-purple-500/20 p-6 rounded-2xl">
+                        <p class="text-sm text-emerald-400 font-medium">
+                            <i class="fa-solid fa-circle-check mr-1"></i> Kartu member ESA berhasil dibuat!
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <a id="downloadBtn" download="ESA_Member_Card.png" href="#" class="flex items-center justify-center gap-2 bg-gray-900 border border-gray-700 hover:bg-gray-800 px-4 py-3 rounded-xl text-sm font-semibold transition">
+                                <i class="fa-solid fa-download"></i> Download PNG
+                            </a>
+                            <a id="joinGroupLink" href="https://chat.whatsapp.com/HpSXlc0YA2IIdfFqtTOr1s" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl text-sm font-bold transition shadow-lg shadow-emerald-700/20">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Gabung Grup
+                            </a>
+                        </div>
+                        <p class="text-[11px] text-gray-500 leading-normal pt-2">
+                            *Tips: Jangan lupa kirim/share hasil download kartu tersebut saat masuk grup agar mempermudah pendataan admin.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: KERJA SAMA ANTAR KOMUNITAS -->
+    <section id="collab" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-gray-900 relative">
+        <div class="max-w-4xl mx-auto bg-gradient-to-br from-gray-900/60 to-purple-950/10 border border-gray-800/80 rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-sm">
+            <div class="space-y-4 text-center md:text-left">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Kerja Sama Antar Komunitas</h3>
+                <p class="text-gray-400 max-w-md leading-relaxed text-sm sm:text-base">
+                    Ingin berkolaborasi, menjalin relasi antar komunitas, media partner, atau mengadakan event astronomi bersama? Hubungi kami langsung.
+                </p>
+            </div>
+            <div class="shrink-0 w-full md:w-auto">
+                <a id="adminWhatsAppBtn" href="https://wa.me/6285781022403" target="_blank" class="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] text-white font-bold rounded-xl shadow-xl transition transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Hubungi Admin ESA
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/80 border-t border-gray-900 py-12 px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-500 space-y-4">
+        <div class="flex justify-center items-center gap-6 text-lg text-gray-400">
+            <a href="https://chat.whatsapp.com/HpSXlc0YA2IIdfFqtTOr1s" target="_blank" class="hover:text-[#3B82F6] transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" class="hover:text-[#8B5CF6] transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="hover:text-purple-400 transition-colors"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p class="tracking-wide">Copyright &copy; 2026 <span class="text-gray-300 font-medium">ESA - EDUKASI SPACE ASTRONOMY</span>. All rights reserved.</p>
+        <p class="text-[11px] text-gray-600">Portal Tautan Resmi Grup WhatsApp & Data Registrasi Keanggotaan Nusantara.</p>
+    </footer>
+
+    <!-- INTERACTIVE MEMBERSHIP ID CARD GENERATION ENGINE SCRIPT -->
+    <script>
+        // Global identification numbering counter initial state helper
+        let currentIdCounter = 1;
+
+        // Auto-initialize standard placeholder canvas frame mockup configuration upon window loading lifecycle
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPlaceholderCard();
+        });
+
+        function renderPlaceholderCard() {
+            const canvas = document.getElementById('cardCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Render basic cosmic template theme outline background structure frame
+            drawCardBackground(ctx, canvas.width, canvas.height);
+            
+            // Render generic placeholders metadata parameters indicators strings structure frame
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+            ctx.font = '500 13px Poppins, sans-serif';
+            ctx.fillText('SILAKAN ISI FORM DI SEBELAH KIRI', 45, 145);
+            ctx.fillText('UNTUK MEMBUAT KARTU MEMBER ANDA', 45, 168);
+            
+            ctx.fillStyle = '#8B5CF6';
+            ctx.font = '700 14px Poppins, sans-serif';
+            ctx.fillText('#ESA000', 380, 240);
+        }
+
+        function drawCardBackground(ctx, width, height) {
+            // Setup linear sleek dark space premium metallic visual spectrum layer background
+            const bgGrad = ctx.createLinearGradient(0, 0, width, height);
+            bgGrad.addColorStop(0, '#090916');
+            bgGrad.addColorStop(0.5, '#0e0d26');
+            bgGrad.addColorStop(1, '#05050f');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, width, height);
+
+            // Subtle nebula background texture simulation
+            const radialGrad = ctx.createRadialGradient(width * 0.8, height * 0.2, 10, width * 0.8, height * 0.2, 180);
+            radialGrad.addColorStop(0, 'rgba(139, 92, 246, 0.15)');
+            radialGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = radialGrad;
+            ctx.fillRect(0, 0, width, height);
+
+            // Render sleek sharp cosmic bounding structural perimeter border layout
+            ctx.strokeStyle = 'rgba(139, 92, 246, 0.4)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(15, 15, width - 30, height - 30);
+
+            // Sleek sub-accent border glow details
+            ctx.strokeStyle = 'rgba(59, 130, 246, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(20, 20, width - 40, height - 40);
+
+            // Permanent brand identity emblem watermark text rendering
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '800 24px Poppins, sans-serif';
+            ctx.fillText('ESA', 40, 55);
+
+            ctx.fillStyle = '#8B5CF6';
+            ctx.font = '700 10px Poppins, sans-serif';
+            ctx.letterSpacing = "2px"; // supported in modern contexts
+            ctx.fillText('EDUKASI SPACE ASTRONOMY', 40, 72);
+            ctx.letterSpacing = "0px"; // reset
+
+            // Bottom horizontal micro bar rule divider accent element configuration lines
+            const lineGrad = ctx.createLinearGradient(40, 0, width - 40, 0);
+            lineGrad.addColorStop(0, '#8B5CF6');
+            lineGrad.addColorStop(0.5, '#3B82F6');
+            lineGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = lineGrad;
+            ctx.fillRect(40, 85, width - 80, 1.5);
+        }
+
+        function processMembership() {
+            // Retrieve core input value fields parameter variables safely strings elements
+            const fullNameInput = document.getElementById('fullName').value.trim();
+            const ageInput = document.getElementById('age').value.trim();
+            const cityInput = document.getElementById('city').value.trim();
+            const fieldInterestSelect = document.getElementById('fieldInterest').value;
+            const reasonInput = document.getElementById('reasonJoin').value.trim();
+
+            // Simple basic text field criteria inputs validation mechanism process block
+            if(!fullNameInput || !cityInput) {
+                alert('Mohon masukkan Nama Lengkap dan Asal Kota Anda terlebih dahulu.');
+                return;
+            }
+
+            const canvas = document.getElementById('cardCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Reset canvas structure frame clear slate parameters
+            drawCardBackground(ctx, canvas.width, canvas.height);
+
+            // Core computational ID generator formulation matrix pattern layout logic
+            const generatedSerialString = "ESA" + String(currentIdCounter).padStart(3, '0');
+
+            // Set contextual font metrics configurations layers arrays
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '700 18px Poppins, sans-serif';
+            ctx.fillText(fullNameInput.toUpperCase(), 40, 130);
+
+            // Meta indicators mapping values logic block
+            ctx.fillStyle = '#94A3B8';
+            ctx.font = '400 12px Poppins, sans-serif';
+            ctx.fillText('Asal Kota / Askot', 40, 160);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '500 13px Poppins, sans-serif';
+            ctx.fillText(cityInput, 40, 178);
+
+            ctx.fillStyle = '#94A3B8';
+            ctx.font = '400 12px Poppins, sans-serif';
+            ctx.fillText('Bidang Peminatan Kosmik', 220, 160);
+            ctx.fillStyle = '#3B82F6';
+            ctx.font = '600 13px Poppins, sans-serif';
+            ctx.fillText(fieldInterestSelect, 220, 178);
+
+            // Footer metadata parameters tags configuration items block
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.font = 'italic 10px Poppins, sans-serif';
+            ctx.fillText('OFFICIAL DIGITAL MEMBERSHIP PASS', 40, 240);
+
+            // Highlighted customized Identification block box rendering parameters indicators 
+            ctx.fillStyle = 'rgba(139, 92, 246, 0.2)';
+            ctx.strokeStyle = '#8B5CF6';
+            ctx.lineWidth = 1;
+            // Draw clean rounded rectangle or square for badge framework panel layout
+            ctx.beginPath();
+            ctx.roundRect(365, 218, 95, 28, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            // Text on ID badge box framework system structure 
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '700 13px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('#' + generatedSerialString, 412.5, 236);
+            ctx.textAlign = 'left'; // Always restore alignment defaults cleanly
+
+            // Bind generated matrix elements string variables data array directly to action link downloads triggers systems anchor tags
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.href = canvas.toDataURL("image/png");
+
+            // Build dynamic custom deep link text parameters layout inside whatsapp integration clicker trigger action links anchor elements components
+            const textWhatsAppTemplate = `Halo Admin ESA, saya sudah mengisi formulir registrasi di website portal. Berikut data saya:\n\nNama: ${fullNameInput}\nUmur: ${ageInput}\nKota: ${cityInput}\nMinat: ${fieldInterestSelect}\nNo ID: #${generatedSerialString}\n\nSaya akan mengirimkan gambar/screenshot Kartu Registrasi Member saya setelah masuk grup.`;
+            const adminWhatsAppBtn = document.getElementById('adminWhatsAppBtn');
+            adminWhatsAppBtn.href = "https://wa.me/6285781022403?text=" + encodeURIComponent(textWhatsAppTemplate);
+
+            // Switch presentation display status flags elements nodes systems interface panel view layout wrapper
+            document.getElementById('actionPanel').classList.remove('hidden');
+
+            // Increment the counter for the next generation
+            currentIdCounter++;
+        }
+    </script>
+</body>
+</html>
